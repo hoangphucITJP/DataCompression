@@ -67,7 +67,7 @@ def upload(request):
     response = list(multiconcent(compression_ratio, process_times))
     response = list(multiconcent(response, downloadlinks))
     response = '<tr>' + '</tr><tr>'.join(response) + '</tr>'
-    response = '<table><tr><th>Compression ratio</th><th>Processed time (ms)</th><th>Processed file</th><tr>' + response + '</table>'
+    response = '<table class="table striped hovered cell-hovered"><tr><th>Compression ratio</th><th>Processed time (ms)</th><th>Processed file</th><tr>' + response + '</table>'
     return HttpResponse(response)
 
 def log(request):
