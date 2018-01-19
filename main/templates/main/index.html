@@ -5,40 +5,21 @@
         {% load static %}
         <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}">
 		<script type="text/javascript" src="{% static 'jquery-3.2.1.min.js' %}"></script>
-		<script type="text/javascript" src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <style>
-            /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
-            .row.content {height: 1500px}
-
-            /* Set gray background color and 100% height */
-            .sidenav {
-              background-color: #f1f1f1;
-              height: 100%;
-            }
-
-            /* Set black background color, white text and some padding */
-            footer {
-              background-color: #555;
-              color: white;
-              padding: 15px;
-            }
-
-            /* On small screens, set height to 'auto' for sidenav and grid */
-            @media screen and (max-width: 767px) {
-              .sidenav {
-                height: auto;
-                padding: 15px;
-              }
-              .row.content {height: auto;}
-            }
             th {
                 padding-right: 5px;
                 padding-left: 5px;
+                background-color: #343434;
+                color: white;
             }
+            table {
+                width: 100%;
+            }
+            tr:nth-child(even) {background-color: #f2f2f2;}
         </style>
     </head>
-    <body style="background: linear-gradient(to bottom right, #afdef7, white);background-repeat: no-repeat;">
+    <body style="background-color:#343434;background-repeat: no-repeat;background-attachment:fixed;">
         <script type="text/javascript">
         	$(document).ready(function(){
         		$("#compress").click(function(){
@@ -71,15 +52,15 @@
         	});
         </script>
 
-        <div class="container-fluid">
+        <div class="container-fluid" >
             <div class="row">
-            <div class="col-sm-3"></div>
-            <div class="col-sm-6" style="background-color:white;box-shadow: 10px 10px 5px #c4c4c4;height: 100vh">
+            <div class="col-sm-2"></div>
+            <div class="col-sm-8" style="background-color:white;min-height:100vh">
                 <div style="border-style:solid;border-width:1px;border-radius: 5px;
-                            border-color:#c4c4c4;margin-top:5px">
+                            border-color:#c4c4c4;margin:5px">
                     <table style="width:100%">
                     <tr>
-                        <td style="padding:25px 25px 25px 25px;width:50%;vertical-align:top">
+                        <td style="padding:25px 25px 25px 25px;width:30%;vertical-align:top">
                             <form method="post" action="" enctype="multipart/form-data">
                                 <label>Chọn file</label>
                                 <input style="margin-left:25px" type="file" id="file" name="file" multiple="multiple"/>
@@ -100,7 +81,7 @@
                                 <input type="submit" style="margin-left:25px;margin-top:5px" id="compress" class="btn btn-primary" value="Submit"/>
                             </form>
                         </td>
-                        <td style="width:50%;vertical-align:top;padding:25px 25px 25px 25px">
+                        <td style="width:70%;vertical-align:top;padding:25px 25px 25px 25px;border-left: 1px solid #ddd">
                             <div style="text-align: center;">
                                 <label>Kết quả</label>
                                 <div id="result"></div>
@@ -109,15 +90,9 @@
                     </tr>
                 </table>
                 </div>
-
-
-
             </div>
-            <div class="col-sm-3"></div>
+            <div class="col-sm-2"></div>
         </div>
         </div>
-
-
-
     </body>
 </html>
