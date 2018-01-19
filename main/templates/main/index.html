@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Data Encode & Decode</title>
+        {% load static %}
+        <link rel="stylesheet" href="{% static 'bootstrap-3.3.7-dist/css/bootstrap.min.css' %}">
+		<script type="text/javascript" src="{% static 'jquery-3.2.1.min.js' %}"></script>
+		<script type="text/javascript" src="{% static 'bootstrap-3.3.7-dist/js/bootstrap.min.js' %}"></script>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <style>
+            /* Set height of the grid so .sidenav can be 100% (adjust if needed) */
+            .row.content {height: 1500px}
+
+            /* Set gray background color and 100% height */
+            .sidenav {
+              background-color: #f1f1f1;
+              height: 100%;
+            }
+
+            /* Set black background color, white text and some padding */
+            footer {
+              background-color: #555;
+              color: white;
+              padding: 15px;
+            }
+
+            /* On small screens, set height to 'auto' for sidenav and grid */
+            @media screen and (max-width: 767px) {
+              .sidenav {
+                height: auto;
+                padding: 15px;
+              }
+              .row.content {height: auto;}
+            }
+            th {
+                padding-right: 5px;
+                padding-left: 5px;
+            }
+        </style>
+    </head>
+    <body style="background: linear-gradient(to bottom right, #afdef7, white);background-repeat: no-repeat;">
+        <script type="text/javascript">
+        	$(document).ready(function(){
+        		$("#compress").click(function(){
+        		    $("#result").html('');
+        		    var ins = document.getElementById('file').files.length;
+        		    fd = new FormData();
+        		    for (var x = 0; x < ins; x++) {
+        		        fd.append("file[]", document.getElementById('file').files[x]);
+        		    }
+        		    //fd.append('file', $('input[type=file]')[0].files);
+        		    fd.append('algo', $("input[name=algo]:checked").val());
+        		    fd.append('mode', $("input[name=mode]:checked").val());
+        		    $.ajax({
+                        url: '/main/upload',
+                        data: fd,
+                        type: 'POST',
+                        contentType: false,
+                        processData: false,
+                        success: function(msg) {
+                            $("#result").html(msg);
+                        },
+                        error: function(data) {
+                            alert("Lỗi mnr: "+data);
+                        }
+                    });
+        		});
+        		$("form").on('submit',function(e){
+           			e.preventDefault();
+        		});
+        	});
+        </script>
+
+        <div class="container-fluid">
+            <div class="row">
+            <div class="col-sm-3"></div>
+            <div class="col-sm-6" style="background-color:white;box-shadow: 10px 10px 5px #c4c4c4;height: 100vh">
+                <div style="border-style:solid;border-width:1px;border-radius: 5px;
+                            border-color:#c4c4c4;margin-top:5px">
+                    <table style="width:100%">
+                    <tr>
+                        <td style="padding:25px 25px 25px 25px;width:50%;vertical-align:top">
+                            <form method="post" action="" enctype="multipart/form-data">
+                                <label>Chọn file</label>
+                                <input style="margin-left:25px" type="file" id="file" name="file" multiple="multiple"/>
+                          		<br>
+                        		<label>Thuật toán nén</label><br>
+                        		<div>
+                        		    <input type="radio" style="margin-left:25px" name="algo" value="run_length"  checked="checked"><span style="padding-left:5px">Run-length coding</span></input><br>
+                    	    	    <input type="radio" style="margin-left:25px" name="algo" value="huffman"><span style="padding-left:5px">Huffman</span></input><br>
+                    		        <input type="radio" style="margin-left:25px" name="algo" value="shano_fanon"><span style="padding-left:5px">Shannon Fano</span></input><br>
+                    		        <input type="radio" style="margin-left:25px" name="algo" value="LZW"><span style="padding-left:5px">LZW</span></input><br>
+                    		        <input type="radio" style="margin-left:25px" name="algo" value="LosslessJpeg"><span style="padding-left:5px">Lossless Jpeg</span></input><br>
+                    	    	</div>
+                    	    	<label>Chế độ</label><br>
+                    	    	<div>
+                    	    	    <input type="radio" style="margin-left:25px" name="mode" value="Encoding" checked="checked"><span style="padding-left:5px">Nén (File văn bản mã hoá utf-8)</span><br>
+                    		        <input type="radio" style="margin-left:25px" name="mode" value="Decoding"><span style="padding-left:5px">Giải nén</span><br>
+                    	    	</div>
+                                <input type="submit" style="margin-left:25px;margin-top:5px" id="compress" class="btn btn-primary" value="Submit"/>
+                            </form>
+                        </td>
+                        <td style="width:50%;vertical-align:top;padding:25px 25px 25px 25px">
+                            <div style="text-align: center;">
+                                <label>Kết quả</label>
+                                <div id="result"></div>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                </div>
+
+
+
+            </div>
+            <div class="col-sm-3"></div>
+        </div>
+        </div>
+
+
+
+    </body>
+</html>
