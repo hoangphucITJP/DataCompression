@@ -1,4 +1,3 @@
-from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .form import UploadFileForm
@@ -9,6 +8,7 @@ import pytz
 from .Encode import Encode
 from .Decode import Decode
 import operator
+import zipfile
 
 output = ''
 
@@ -23,10 +23,10 @@ def index(request):
     return HttpResponse(template.render({'form':form}))
 
 def upload(request):
-    write_tracking(request, 'upload')
     if request.method != 'POST':
         return HttpResponse('What\'s up?')
 
+    write_tracking(request, 'uploaded ' + str(len(request.FILES.getlist('file[]'))) + ' file(s) for ' + request.POST['algo'] + ' ' + request.POST['mode'])
     #Save files
     inputPath = path + '/data/input/'
     filenames = [handle_uploaded_file(i, inputPath) for i in request.FILES.getlist('file[]')]
@@ -45,7 +45,7 @@ def upload(request):
     input_file_size = [os.path.getsize(inputPath + i) for i in filenames]
     output_file_size = [os.path.getsize(outputPath + i) for i in filenames]
     multidivide = lambda a,b: map(operator.truediv, a,b)
-    if (request.POST['mode'] == 'Encoding'):
+    if (request.POST['mode'] == 'Decoding'):
         compression_ratio = list(multidivide(output_file_size, input_file_size))
     else:
         compression_ratio = list(multidivide(input_file_size, output_file_size))
@@ -67,7 +67,10 @@ def tracking(request):
     return HttpResponse(res)
 
 def download(request):
-    filename = request.GET['file']
+    try:
+        filename = request.GET['file']
+    except:
+        return HttpResponse("What's up?")
     file = open(path + '/data/output/' + filename, mode='rb')
     data = file.read()
     file.close()
