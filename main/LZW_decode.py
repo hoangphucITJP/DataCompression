@@ -12,7 +12,7 @@ from sympy import sympify
 def LZW_decode_func(Str,List):
 
 	Str_de = Str
-	my_dict = sympify(List)
+	my_dict = List
 	code = [i.strip() for i in Str_de.split(' ')]
 	s=""
 	result=""

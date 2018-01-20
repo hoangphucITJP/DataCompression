@@ -11,7 +11,7 @@ def runlengthcoding_func(Str):
 	for i in Str:
 		if i != tmp:
 			if length != 0:
-				result += str(length) + tmp	+ " "
+				result += str(length) + tmp
 			tmp = i
 			length = 1
 		else:
