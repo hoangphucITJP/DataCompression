@@ -20,6 +20,36 @@
                 display:block;
                 text-decoration:none;
             }
+
+            /* The navigation bar */
+            .navbar {
+                overflow: hidden;
+
+                top: 0; /* Position the navbar at the top of the page */
+                width: 100%; /* Full width */
+                background-color: white;
+            }
+
+            /* Links inside the navbar */
+            .navbar a {
+                float: left;
+                display: block;
+                color: #f2f2f2;
+                text-align: center;
+                padding: 14px 16px;
+                text-decoration: none;
+            }
+
+            /* Change background on mouse-over */
+            .navbar a:hover {
+                background: #ddd;
+                color: black;
+            }
+
+            /* Main content */
+            .main {
+                margin-top: 0px; /* Add a top margin to avoid content overlay */
+            }
         </style>
     </head>
     <body style="background-color:#343434;background-repeat: no-repeat;background-attachment:fixed;">
@@ -58,10 +88,16 @@
         	});
         </script>
 
-        <div class="grid" >
+        <div class="grid main">
             <div class="row cells6">
                 <div class="cell"></div>
                 <div class="cell colspan4" style="background-color:white;min-height:100vh">
+                    <div style="background: white;color: black;padding-top:5px;padding-bottom:5px">
+                        <center>
+                            <h1>ĐỒ ÁN CUỐI KÌ</h1>
+                            <h3>MÔN HỌC: TÍNH TOÁN ĐA PHƯƠNG TIỆN - 2017</h3>
+                        </center>
+                    </div>
                     <div style="border-style:solid;border-width:1px;border-radius: 5px;
                                 border-color:#c4c4c4;margin:5px">
                         <table style="width:100%">
